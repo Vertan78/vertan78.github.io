@@ -26,7 +26,6 @@
       overflow-x: hidden;
     }
 
-    /* Custom cursor */
     .cursor {
       position: fixed;
       width: 12px; height: 12px;
@@ -48,7 +47,6 @@
       mix-blend-mode: difference;
     }
 
-    /* Noise overlay */
     body::before {
       content: '';
       position: fixed;
@@ -59,7 +57,6 @@
       opacity: 0.4;
     }
 
-    /* NAV */
     nav {
       position: fixed; top: 0; width: 100%;
       display: flex; justify-content: space-between; align-items: center;
@@ -84,7 +81,6 @@
     }
     .nav-links a:hover { color: var(--accent); }
 
-    /* HERO */
     .hero {
       min-height: 100vh;
       display: flex; flex-direction: column;
@@ -142,10 +138,7 @@
       text-decoration: none;
       transition: all 0.2s;
     }
-    .btn-primary {
-      background: var(--accent);
-      color: #000;
-    }
+    .btn-primary { background: var(--accent); color: #000; }
     .btn-primary:hover { background: #fff; }
     .btn-outline {
       background: transparent;
@@ -154,7 +147,6 @@
     }
     .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
 
-    /* scroll indicator */
     .scroll-hint {
       position: absolute; bottom: 2rem; left: 3rem;
       font-size: 0.65rem; letter-spacing: 3px;
@@ -168,22 +160,17 @@
       background: var(--muted);
     }
 
-    /* GRID LINE decoration */
     .hero-line {
       position: absolute; right: 3rem; top: 50%;
       transform: translateY(-50%);
       display: flex; flex-direction: column; gap: 0.5rem;
       opacity: 0; animation: fadeIn 1s ease 1s forwards;
     }
-    .hero-line span {
-      display: block; width: 1px;
-      background: var(--muted);
-    }
+    .hero-line span { display: block; width: 1px; background: var(--muted); }
     .hero-line span:nth-child(1) { height: 80px; }
     .hero-line span:nth-child(2) { height: 40px; background: var(--accent); }
     .hero-line span:nth-child(3) { height: 120px; }
 
-    /* ABOUT */
     .section {
       padding: 8rem 3rem;
       max-width: 1100px;
@@ -202,14 +189,8 @@
       line-height: 1;
       margin-bottom: 2rem;
     }
-    .section p {
-      color: #888;
-      line-height: 2;
-      font-size: 0.85rem;
-      max-width: 600px;
-    }
+    .section p { color: #888; line-height: 2; font-size: 0.85rem; max-width: 600px; }
 
-    /* CARDS */
     .cards {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -240,16 +221,9 @@
       line-height: 1;
       margin-bottom: 1rem;
     }
-    .card h3 {
-      font-size: 0.85rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 0.75rem;
-      color: var(--accent);
-    }
+    .card h3 { font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.75rem; color: var(--accent); }
     .card p { font-size: 0.8rem; color: #666; line-height: 1.8; }
 
-    /* MARQUEE */
     .marquee-wrap {
       border-top: 1px solid var(--muted);
       border-bottom: 1px solid var(--muted);
@@ -262,16 +236,9 @@
       animation: marquee 18s linear infinite;
       white-space: nowrap;
     }
-    .marquee span {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.2rem;
-      letter-spacing: 4px;
-      color: var(--muted);
-      text-transform: uppercase;
-    }
+    .marquee span { font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem; letter-spacing: 4px; color: var(--muted); text-transform: uppercase; }
     .marquee span.highlight { color: var(--accent); }
 
-    /* CONTACT */
     .contact-section {
       padding: 8rem 3rem;
       text-align: center;
@@ -283,10 +250,7 @@
       line-height: 0.9;
       margin-bottom: 2rem;
     }
-    .contact-section h2 span { 
-      -webkit-text-stroke: 1px var(--text);
-      color: transparent;
-    }
+    .contact-section h2 span { -webkit-text-stroke: 1px var(--text); color: transparent; }
     .contact-email {
       font-size: 0.85rem;
       letter-spacing: 3px;
@@ -298,7 +262,6 @@
     }
     .contact-email:hover { opacity: 0.6; }
 
-    /* FOOTER */
     footer {
       border-top: 1px solid var(--muted);
       padding: 2rem 3rem;
@@ -310,7 +273,6 @@
       letter-spacing: 2px;
     }
 
-    /* ANIMATIONS */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -324,16 +286,12 @@
       to { transform: translateX(-50%); }
     }
 
-    /* reveal on scroll */
     .reveal {
       opacity: 0;
       transform: translateY(40px);
       transition: opacity 0.8s ease, transform 0.8s ease;
     }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
   </style>
 </head>
 <body>
@@ -341,7 +299,6 @@
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
-  <!-- NAV -->
   <nav>
     <div class="logo">Vertan</div>
     <div class="nav-links">
@@ -351,7 +308,6 @@
     </div>
   </nav>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-bg"></div>
     <p class="hero-tag">// Welcome to my space</p>
@@ -367,7 +323,6 @@
     </div>
   </section>
 
-  <!-- MARQUEE -->
   <div class="marquee-wrap">
     <div class="marquee">
       <span>Design</span><span class="highlight">✦</span>
@@ -383,14 +338,12 @@
     </div>
   </div>
 
-  <!-- ABOUT -->
   <section class="section" id="about">
     <p class="section-label reveal">// 001 — About</p>
     <h2 class="reveal">WHO<br>AM I?</h2>
     <p class="reveal">Just someone who builds things on the internet and makes them look fire. Change this text to whatever you want people to know about you.</p>
   </section>
 
-  <!-- CARDS -->
   <div style="padding: 0 3rem 8rem; max-width: 1100px; margin: 0 auto;" id="work">
     <p class="section-label reveal">// 002 — Work</p>
     <h2 class="reveal" style="font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem,6vw,5rem);">WHAT I DO</h2>
@@ -413,21 +366,18 @@
     </div>
   </div>
 
-  <!-- CONTACT -->
   <section class="contact-section" id="contact">
     <p class="section-label reveal" style="text-align:center">// 003 — Contact</p>
     <h2 class="reveal">LET'S<br><span>TALK</span></h2>
     <a href="mailto:your@email.com" class="contact-email reveal">your@email.com</a>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <span>© 2026 Vertan78</span>
     <span>Built with 🔥</span>
   </footer>
 
   <script>
-    // Custom cursor
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursorRing');
     let mx = 0, my = 0, rx = 0, ry = 0;
@@ -452,13 +402,10 @@
       el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
     });
 
-    // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-        }
+        if (e.isIntersecting) e.target.classList.add('visible');
       });
     }, { threshold: 0.15 });
     reveals.forEach(r => observer.observe(r));
