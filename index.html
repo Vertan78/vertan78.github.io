@@ -1,992 +1,1194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>The Drink Yard Cafe — Kalyan West</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet"/>
-  <style>
-    :root {
-      --yellow: #F5C518;
-      --yellow-deep: #D4A017;
-      --yellow-pale: #FFF8DC;
-      --black: #0D0D0D;
-      --black-soft: #1A1A1A;
-      --white: #FAFAF7;
-      --gray: #888;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>delighted ✨ — gift shop in asheville, nc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@300;400;500&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fdf7ef;
+    --pink: #f4a7b0;
+    --yellow: #f9e04b;
+    --teal: #4ecdc4;
+    --coral: #ff6b6b;
+    --lilac: #c3b1e1;
+    --green: #a8d8a8;
+    --navy: #1a1a2e;
+    --text: #2c2c2c;
+  }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; }
 
-    body {
-      background: var(--black);
-      color: var(--white);
-      font-family: 'DM Sans', sans-serif;
-      overflow-x: hidden;
-      cursor: none;
-    }
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
 
-    /* Custom Cursor */
-    .cursor {
-      width: 14px; height: 14px;
-      background: var(--yellow);
-      border-radius: 50%;
-      position: fixed; top: 0; left: 0;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s ease, width 0.2s, height 0.2s, background 0.2s;
-      mix-blend-mode: difference;
-    }
-    .cursor.hover { width: 40px; height: 40px; }
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+  }
 
-    /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 60px;
-      background: rgba(13,13,13,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(245,197,24,0.15);
-    }
-    .nav-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.7rem;
-      letter-spacing: 3px;
-      color: var(--yellow);
-    }
-    .nav-logo span { color: var(--white); }
-    .nav-links { display: flex; gap: 36px; list-style: none; }
-    .nav-links a {
-      color: var(--white);
-      text-decoration: none;
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      opacity: 0.7;
-      transition: opacity 0.2s, color 0.2s;
-    }
-    .nav-links a:hover { opacity: 1; color: var(--yellow); }
-    .nav-cta {
-      background: var(--yellow);
-      color: var(--black);
-      font-weight: 600;
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 10px 24px;
-      border-radius: 2px;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-    .nav-cta:hover { background: var(--yellow-deep); }
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 18px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(253, 247, 239, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1.5px solid rgba(0,0,0,0.06);
+  }
 
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-left {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 140px 60px 80px;
-      position: relative;
-      z-index: 2;
-    }
-    .hero-tag {
-      display: inline-block;
-      background: var(--yellow);
-      color: var(--black);
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      padding: 6px 14px;
-      margin-bottom: 28px;
-      width: fit-content;
-    }
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3.5rem, 6vw, 6rem);
-      line-height: 1.0;
-      font-weight: 900;
-      color: var(--white);
-      margin-bottom: 24px;
-    }
-    .hero-title em {
-      font-style: italic;
-      color: var(--yellow);
-    }
-    .hero-sub {
-      font-size: 1rem;
-      line-height: 1.7;
-      opacity: 0.6;
-      max-width: 380px;
-      margin-bottom: 40px;
-    }
-    .hero-actions { display: flex; gap: 16px; align-items: center; }
-    .btn-primary {
-      background: var(--yellow);
-      color: var(--black);
-      font-weight: 700;
-      font-size: 0.8rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 14px 32px;
-      border-radius: 2px;
-      text-decoration: none;
-      transition: transform 0.15s, background 0.2s;
-    }
-    .btn-primary:hover { transform: translateY(-2px); background: var(--yellow-deep); }
-    .btn-ghost {
-      color: var(--white);
-      font-size: 0.8rem;
-      letter-spacing: 1px;
-      text-decoration: none;
-      opacity: 0.6;
-      display: flex; align-items: center; gap: 8px;
-      transition: opacity 0.2s;
-    }
-    .btn-ghost:hover { opacity: 1; }
-    .btn-ghost svg { width: 18px; }
+  .nav-logo {
+    font-family: 'Caveat', cursive;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.5px;
+  }
 
-    .hero-right {
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-right::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(to right, var(--black) 0%, transparent 40%);
-      z-index: 1;
-    }
-    .hero-bg-pattern {
-      position: absolute; inset: 0;
-      background:
-        repeating-linear-gradient(
-          45deg,
-          rgba(245,197,24,0.04) 0,
-          rgba(245,197,24,0.04) 1px,
-          transparent 0,
-          transparent 50%
-        );
-      background-size: 24px 24px;
-    }
-    .hero-image-stack {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .cafe-visual {
-      width: 100%; height: 100%;
-      background: linear-gradient(135deg, #1a1a00 0%, #2d2600 40%, #1a1500 100%);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 0;
-    }
-    .big-cup {
-      font-size: 9rem;
-      filter: drop-shadow(0 0 40px rgba(245,197,24,0.4));
-      animation: floatCup 3s ease-in-out infinite;
-    }
-    @keyframes floatCup {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-14px); }
-    }
-    .hero-rating {
-      position: absolute;
-      bottom: 60px; right: 60px;
-      z-index: 3;
-      background: rgba(245,197,24,0.12);
-      border: 1px solid rgba(245,197,24,0.3);
-      backdrop-filter: blur(10px);
-      padding: 20px 28px;
-      text-align: center;
-      border-radius: 4px;
-    }
-    .rating-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 3.5rem;
-      color: var(--yellow);
-      line-height: 1;
-    }
-    .rating-stars { color: var(--yellow); font-size: 1rem; margin: 4px 0; }
-    .rating-count { font-size: 0.7rem; opacity: 0.5; letter-spacing: 1px; }
+  .nav-logo span {
+    display: inline-block;
+    width: 10px; height: 10px;
+    background: var(--coral);
+    border-radius: 50%;
+    margin-left: 4px;
+    vertical-align: middle;
+    position: relative;
+    top: -2px;
+  }
 
-    .hero-scroll-hint {
-      position: absolute;
-      bottom: 40px; left: 60px;
-      z-index: 3;
-      display: flex; align-items: center; gap: 10px;
-      opacity: 0.4;
-      font-size: 0.7rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-    .scroll-line {
-      width: 40px; height: 1px;
-      background: var(--white);
-      animation: scrollLine 2s ease-in-out infinite;
-    }
-    @keyframes scrollLine {
-      0%,100% { transform: scaleX(1); }
-      50% { transform: scaleX(0.5); }
-    }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 36px;
+  }
 
-    /* MARQUEE */
-    .marquee-strip {
-      background: var(--yellow);
-      padding: 14px 0;
-      overflow: hidden;
-      white-space: nowrap;
-    }
-    .marquee-inner {
-      display: inline-block;
-      animation: marquee 18s linear infinite;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.1rem;
-      letter-spacing: 4px;
-      color: var(--black);
-    }
-    @keyframes marquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    .marquee-dot { margin: 0 24px; opacity: 0.4; }
+  nav ul a {
+    text-decoration: none;
+    color: var(--text);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    position: relative;
+  }
 
-    /* SECTION SHARED */
-    section { padding: 100px 60px; }
-    .section-label {
-      font-size: 0.65rem;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--yellow);
-      margin-bottom: 14px;
-      font-weight: 600;
-    }
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      font-weight: 900;
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
-    .section-title em { font-style: italic; color: var(--yellow); }
+  nav ul a::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: 0;
+    width: 0; height: 2px;
+    background: var(--coral);
+    transition: width 0.25s ease;
+  }
 
-    /* ABOUT */
-    #about {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-    .about-visual {
-      position: relative;
-    }
-    .about-card {
-      background: var(--black-soft);
-      border: 1px solid rgba(245,197,24,0.15);
-      padding: 50px 40px;
-      border-radius: 4px;
-      position: relative;
-      overflow: hidden;
-    }
-    .about-card::before {
-      content: '';
-      position: absolute; top: 0; left: 0;
-      width: 4px; height: 100%;
-      background: var(--yellow);
-    }
-    .about-card-icon { font-size: 3rem; margin-bottom: 20px; }
-    .about-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      margin-bottom: 12px;
-    }
-    .about-card p { opacity: 0.6; line-height: 1.7; font-size: 0.9rem; }
-    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-    .stat-box {
-      background: rgba(245,197,24,0.07);
-      border: 1px solid rgba(245,197,24,0.15);
-      padding: 24px;
-      text-align: center;
-      border-radius: 2px;
-    }
-    .stat-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.4rem;
-      color: var(--yellow);
-      display: block;
-    }
-    .stat-label { font-size: 0.7rem; letter-spacing: 1px; opacity: 0.5; text-transform: uppercase; }
+  nav ul a:hover { color: var(--coral); }
+  nav ul a:hover::after { width: 100%; }
 
-    /* MENU */
-    #menu { background: var(--black-soft); }
-    .menu-header {
-      display: flex; justify-content: space-between; align-items: flex-end;
-      margin-bottom: 50px;
-    }
-    .menu-tabs {
-      display: flex; gap: 8px;
-    }
-    .tab-btn {
-      background: none;
-      border: 1px solid rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.5);
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 8px 18px;
-      border-radius: 2px;
-      cursor: none;
-      transition: all 0.2s;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .tab-btn.active, .tab-btn:hover {
-      background: var(--yellow);
-      color: var(--black);
-      border-color: var(--yellow);
-    }
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 24px;
-    }
-    .menu-item {
-      background: var(--black);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 4px;
-      overflow: hidden;
-      transition: transform 0.2s, border-color 0.2s;
-    }
-    .menu-item:hover {
-      transform: translateY(-4px);
-      border-color: rgba(245,197,24,0.4);
-    }
-    .menu-item-img {
-      height: 160px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 4rem;
-      background: linear-gradient(135deg, #1c1c00, #2a2200);
-    }
-    .menu-item-body { padding: 20px; }
-    .menu-item-name {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-    .menu-item-desc { font-size: 0.8rem; opacity: 0.5; line-height: 1.5; margin-bottom: 14px; }
-    .menu-item-footer {
-      display: flex; justify-content: space-between; align-items: center;
-    }
-    .menu-price {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.4rem;
-      color: var(--yellow);
-      letter-spacing: 1px;
-    }
-    .menu-badge {
-      font-size: 0.65rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      background: rgba(245,197,24,0.15);
-      color: var(--yellow);
-      padding: 4px 10px;
-      border-radius: 2px;
-    }
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
 
-    /* AMBIENCE */
-    #ambience {
-      text-align: center;
-      background: var(--black);
-      position: relative;
-      overflow: hidden;
-    }
-    #ambience::before {
-      content: '';
-      position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(245,197,24,0.07) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .ambience-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      margin-top: 60px;
-    }
-    .amb-card {
-      background: var(--black-soft);
-      padding: 50px 30px;
-      text-align: center;
-      transition: background 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    .amb-card:hover { background: rgba(245,197,24,0.08); }
-    .amb-card::after {
-      content: '';
-      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-      width: 0; height: 2px;
-      background: var(--yellow);
-      transition: width 0.3s;
-    }
-    .amb-card:hover::after { width: 60px; }
-    .amb-icon { font-size: 2.5rem; margin-bottom: 20px; }
-    .amb-card h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-    }
-    .amb-card p { opacity: 0.5; font-size: 0.85rem; line-height: 1.6; }
+  .hero-bg-shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.35;
+    pointer-events: none;
+  }
 
-    /* REVIEWS */
-    #reviews { background: var(--black-soft); }
-    .reviews-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 50px;
-    }
-    .review-card {
-      background: var(--black);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 4px;
-      padding: 30px;
-      position: relative;
-    }
-    .review-quote {
-      position: absolute; top: 20px; right: 24px;
-      font-family: 'Playfair Display', serif;
-      font-size: 5rem;
-      color: rgba(245,197,24,0.08);
-      line-height: 1;
-    }
-    .review-stars { color: var(--yellow); font-size: 0.85rem; margin-bottom: 16px; }
-    .review-text {
-      font-size: 0.88rem;
-      line-height: 1.75;
-      opacity: 0.75;
-      font-style: italic;
-      margin-bottom: 24px;
-    }
-    .reviewer {
-      display: flex; align-items: center; gap: 12px;
-    }
-    .reviewer-avatar {
-      width: 36px; height: 36px;
-      background: var(--yellow);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--black);
-    }
-    .reviewer-name { font-size: 0.85rem; font-weight: 600; }
-    .reviewer-meta { font-size: 0.7rem; opacity: 0.4; }
+  .shape-1 { width: 600px; height: 600px; background: var(--pink); top: -100px; right: -100px; animation: float1 8s ease-in-out infinite; }
+  .shape-2 { width: 400px; height: 400px; background: var(--yellow); bottom: -50px; left: 200px; animation: float2 10s ease-in-out infinite; }
+  .shape-3 { width: 300px; height: 300px; background: var(--teal); top: 40%; left: -80px; animation: float1 12s ease-in-out infinite reverse; }
 
-    /* INFO */
-    #info {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-      background: var(--black);
-    }
-    .info-list { list-style: none; margin-top: 36px; }
-    .info-list li {
-      display: flex; align-items: flex-start; gap: 16px;
-      padding: 18px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-    }
-    .info-icon {
-      color: var(--yellow);
-      font-size: 1.2rem;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .info-detail strong { display: block; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; opacity: 0.4; margin-bottom: 4px; }
-    .info-detail span { font-size: 0.95rem; }
-    .map-placeholder {
-      background: var(--black-soft);
-      border: 1px solid rgba(245,197,24,0.15);
-      border-radius: 4px;
-      height: 400px;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 16px;
-      position: relative;
-      overflow: hidden;
-    }
-    .map-placeholder::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        repeating-linear-gradient(0deg, rgba(245,197,24,0.03) 0, rgba(245,197,24,0.03) 1px, transparent 0, transparent 40px),
-        repeating-linear-gradient(90deg, rgba(245,197,24,0.03) 0, rgba(245,197,24,0.03) 1px, transparent 0, transparent 40px);
-    }
-    .map-pin { font-size: 3rem; animation: bounce 1.5s ease-in-out infinite; }
-    @keyframes bounce {
-      0%,100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-    .map-address { font-size: 0.8rem; opacity: 0.5; text-align: center; max-width: 280px; line-height: 1.6; }
-    .map-btn {
-      background: var(--yellow);
-      color: var(--black);
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 0.75rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      padding: 12px 28px;
-      border-radius: 2px;
-      transition: background 0.2s;
-    }
-    .map-btn:hover { background: var(--yellow-deep); }
+  @keyframes float1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(20px,-30px)} }
+  @keyframes float2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-15px,25px)} }
 
-    /* FOOTER */
-    footer {
-      background: var(--black-soft);
-      border-top: 1px solid rgba(245,197,24,0.15);
-      padding: 50px 60px 30px;
-    }
-    .footer-top {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      margin-bottom: 40px;
-    }
-    .footer-brand {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 2.5rem;
-      letter-spacing: 4px;
-      color: var(--yellow);
-      line-height: 1;
-    }
-    .footer-brand span { color: var(--white); }
-    .footer-tagline { font-size: 0.8rem; opacity: 0.4; margin-top: 8px; }
-    .footer-links { display: flex; flex-direction: column; gap: 10px; }
-    .footer-links a {
-      color: var(--white);
-      text-decoration: none;
-      font-size: 0.85rem;
-      opacity: 0.5;
-      transition: opacity 0.2s, color 0.2s;
-    }
-    .footer-links a:hover { opacity: 1; color: var(--yellow); }
-    .footer-contact { font-size: 0.85rem; opacity: 0.5; line-height: 2; }
-    .footer-contact strong { color: var(--yellow); opacity: 1; }
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.07);
-      padding-top: 24px;
-      display: flex; justify-content: space-between;
-      font-size: 0.7rem;
-      opacity: 0.3;
-    }
+  .hero-text { position: relative; z-index: 2; }
 
-    /* ANIMATIONS */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .hero-eyebrow {
+    font-family: 'Caveat', cursive;
+    font-size: 1.25rem;
+    color: var(--coral);
+    font-weight: 500;
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.2s ease forwards;
+  }
 
-    /* MOBILE */
-    @media (max-width: 768px) {
-      nav { padding: 18px 24px; }
-      .nav-links { display: none; }
-      section { padding: 70px 24px; }
-      .hero { grid-template-columns: 1fr; }
-      .hero-left { padding: 120px 24px 60px; }
-      .hero-right { display: none; }
-      #about, #info { grid-template-columns: 1fr; gap: 40px; }
-      .reviews-grid, .ambience-grid { grid-template-columns: 1fr; }
-      .menu-header { flex-direction: column; gap: 20px; align-items: flex-start; }
-      footer { padding: 40px 24px 24px; }
-      .footer-top { flex-direction: column; gap: 30px; }
-      .hero-title { font-size: 3rem; }
-    }
-  </style>
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(4rem, 7vw, 7rem);
+    font-weight: 400;
+    line-height: 1.0;
+    letter-spacing: -2px;
+    color: var(--text);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.4s ease forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--coral);
+  }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+    max-width: 440px;
+    margin-bottom: 40px;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.6s ease forwards;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.8s ease forwards;
+  }
+
+  .btn-primary {
+    padding: 15px 36px;
+    background: var(--text);
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 50px;
+    transition: transform 0.2s, background 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--coral); transform: translateY(-2px); }
+
+  .btn-secondary {
+    padding: 15px 36px;
+    background: transparent;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 50px;
+    border: 1.5px solid var(--text);
+    transition: transform 0.2s, border-color 0.2s, color 0.2s;
+  }
+
+  .btn-secondary:hover { border-color: var(--coral); color: var(--coral); transform: translateY(-2px); }
+
+  .hero-visual {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-card {
+    background: white;
+    border-radius: 24px;
+    padding: 48px;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.1);
+    transform: rotate(2deg);
+    max-width: 340px;
+    width: 100%;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s ease forwards;
+    position: relative;
+  }
+
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    background: linear-gradient(135deg, var(--pink) 0%, var(--yellow) 100%);
+    z-index: -1;
+    transform: translate(8px, 8px);
+  }
+
+  .card-emoji { font-size: 3.5rem; margin-bottom: 16px; display: block; }
+  .card-label {
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .card-desc { font-size: 0.9rem; color: #666; line-height: 1.6; }
+
+  .stars {
+    display: flex;
+    gap: 4px;
+    margin-top: 20px;
+  }
+
+  .stars span {
+    color: var(--yellow);
+    font-size: 1.2rem;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15));
+  }
+
+  .rating-text {
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    color: #888;
+    margin-top: 4px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-wrap {
+    background: var(--text);
+    color: var(--cream);
+    padding: 18px 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 0;
+    white-space: nowrap;
+    animation: marquee 20s linear infinite;
+  }
+
+  .marquee-item {
+    font-family: 'Caveat', cursive;
+    font-size: 1.3rem;
+    padding: 0 36px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .marquee-dot { color: var(--yellow); font-size: 1rem; }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── ABOUT ── */
+  .about {
+    padding: 100px 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .about-image-stack {
+    position: relative;
+    height: 480px;
+  }
+
+  .img-placeholder {
+    border-radius: 16px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Caveat', cursive;
+    font-size: 1.2rem;
+    color: white;
+    gap: 12px;
+  }
+
+  .img-1 {
+    width: 280px; height: 340px;
+    background: linear-gradient(135deg, var(--pink), var(--lilac));
+    top: 0; left: 20px;
+    transform: rotate(-3deg);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    font-size: 4rem;
+  }
+
+  .img-2 {
+    width: 220px; height: 260px;
+    background: linear-gradient(135deg, var(--teal), var(--green));
+    bottom: 0; right: 0;
+    transform: rotate(4deg);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    font-size: 3.5rem;
+  }
+
+  .img-tag {
+    background: white;
+    border-radius: 50px;
+    padding: 8px 20px;
+    font-family: 'Caveat', cursive;
+    font-size: 0.9rem;
+    color: var(--text);
+    position: absolute;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    white-space: nowrap;
+  }
+
+  .tag-1 { top: 30px; right: 10px; transform: rotate(6deg); }
+  .tag-2 { bottom: 60px; left: -10px; transform: rotate(-4deg); }
+
+  .section-eyebrow {
+    font-family: 'Caveat', cursive;
+    font-size: 1.1rem;
+    color: var(--coral);
+    font-weight: 500;
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .section-title em { font-style: italic; color: var(--coral); }
+
+  .about-body {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #555;
+    font-weight: 300;
+    margin-bottom: 32px;
+  }
+
+  .about-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 32px;
+  }
+
+  .stat-block {}
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #888;
+    margin-top: 4px;
+  }
+
+  /* ── CATEGORIES ── */
+  .categories {
+    padding: 80px 48px;
+    background: var(--text);
+    color: var(--cream);
+  }
+
+  .categories-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .categories-header .section-eyebrow { color: var(--yellow); }
+  .categories-header .section-title { color: var(--cream); }
+  .categories-header .section-title em { color: var(--pink); }
+
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .cat-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 36px 28px;
+    text-align: center;
+    transition: background 0.3s, transform 0.3s;
+    cursor: pointer;
+  }
+
+  .cat-card:hover {
+    background: rgba(255,255,255,0.12);
+    transform: translateY(-6px);
+  }
+
+  .cat-emoji { font-size: 3rem; margin-bottom: 16px; display: block; }
+
+  .cat-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: white;
+  }
+
+  .cat-desc { font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+  .cat-card:nth-child(1) { border-top: 3px solid var(--pink); }
+  .cat-card:nth-child(2) { border-top: 3px solid var(--yellow); }
+  .cat-card:nth-child(3) { border-top: 3px solid var(--teal); }
+  .cat-card:nth-child(4) { border-top: 3px solid var(--lilac); }
+  .cat-card:nth-child(5) { border-top: 3px solid var(--coral); }
+  .cat-card:nth-child(6) { border-top: 3px solid var(--green); }
+  .cat-card:nth-child(7) { border-top: 3px solid var(--yellow); }
+  .cat-card:nth-child(8) { border-top: 3px solid var(--pink); }
+
+  /* ── REVIEWS ── */
+  .reviews {
+    padding: 100px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .reviews-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  .review-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .review-card {
+    background: white;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.07);
+    position: relative;
+    transition: transform 0.3s;
+  }
+
+  .review-card:hover { transform: translateY(-4px); }
+
+  .review-card:nth-child(1) { background: #fff8f0; }
+  .review-card:nth-child(2) { background: #f0fffe; transform: translateY(-20px); }
+  .review-card:nth-child(3) { background: #fff0f2; }
+
+  .review-stars { font-size: 1rem; margin-bottom: 16px; }
+  .review-quote {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .reviewer {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #aaa;
+    font-weight: 500;
+  }
+
+  .quote-mark {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    color: var(--pink);
+    opacity: 0.3;
+    position: absolute;
+    top: 8px; right: 24px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  /* ── VISIT ── */
+  .visit {
+    padding: 80px 48px;
+    background: linear-gradient(135deg, var(--pink) 0%, var(--lilac) 60%, var(--teal) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .visit::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .visit-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .visit-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 700;
+    color: white;
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .visit-sub {
+    color: rgba(255,255,255,0.8);
+    font-size: 1.1rem;
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 32px;
+  }
+
+  .visit-btn {
+    display: inline-block;
+    padding: 15px 36px;
+    background: white;
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 50px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+  }
+
+  .visit-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.2); }
+
+  .visit-info {
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 40px;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+
+  .info-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    align-items: flex-start;
+  }
+
+  .info-row:last-child { margin-bottom: 0; }
+
+  .info-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+
+  .info-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 3px;
+    font-weight: 500;
+  }
+
+  .info-value {
+    color: white;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  /* ── VIBE / PHILOSOPHY ── */
+  .vibe {
+    padding: 100px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .vibe-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 5vw, 5rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 48px;
+    color: var(--text);
+  }
+
+  .vibe-title em { font-style: italic; color: var(--coral); }
+
+  .vibe-pills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 60px;
+  }
+
+  .pill {
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-family: 'Caveat', cursive;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: transform 0.2s;
+    cursor: default;
+  }
+
+  .pill:hover { transform: scale(1.05) rotate(-1deg); }
+
+  .pill-pink { background: var(--pink); color: white; }
+  .pill-yellow { background: var(--yellow); color: var(--text); }
+  .pill-teal { background: var(--teal); color: white; }
+  .pill-lilac { background: var(--lilac); color: white; }
+  .pill-coral { background: var(--coral); color: white; }
+  .pill-green { background: var(--green); color: var(--text); }
+
+  /* ── NEWSLETTER ── */
+  .newsletter {
+    padding: 80px 48px;
+    background: var(--cream);
+    text-align: center;
+    border-top: 1px solid rgba(0,0,0,0.06);
+  }
+
+  .newsletter-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .newsletter-sub {
+    color: #888;
+    font-size: 1rem;
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+
+  .email-form {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .email-form input {
+    flex: 1;
+    padding: 14px 24px;
+    border: 1.5px solid rgba(0,0,0,0.12);
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    background: white;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .email-form input:focus { border-color: var(--coral); }
+
+  .email-form button {
+    padding: 14px 28px;
+    background: var(--coral);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .email-form button:hover { background: #e85555; transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--text);
+    color: var(--cream);
+    padding: 60px 48px 36px;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 48px;
+    max-width: 1200px;
+    margin: 0 auto 48px;
+  }
+
+  .footer-brand .nav-logo { font-size: 2.4rem; display: block; margin-bottom: 16px; color: white; }
+  .footer-tagline { color: rgba(255,255,255,0.5); font-size: 0.9rem; line-height: 1.7; font-weight: 300; }
+
+  .footer-col-title {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 300;
+    transition: color 0.2s;
+  }
+  .footer-col ul a:hover { color: var(--pink); }
+
+  .social-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .social-btn {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    display: flex; align-items: center; justify-content: center;
+    color: white;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .social-btn:hover { background: var(--coral); transform: scale(1.1); }
+
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-copy {
+    color: rgba(255,255,255,0.3);
+    font-size: 0.8rem;
+  }
+
+  .footer-heart {
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    color: var(--pink);
+  }
+
+  /* ── SCROLL REVEALS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    nav ul { gap: 20px; }
+    .hero { grid-template-columns: 1fr; padding: 120px 24px 60px; text-align: center; }
+    .hero-sub { margin: 0 auto 32px; }
+    .hero-cta { justify-content: center; }
+    .hero-visual { margin-top: 48px; }
+    .about { grid-template-columns: 1fr; padding: 60px 24px; gap: 48px; }
+    .about-image-stack { height: 300px; }
+    .cat-grid { grid-template-columns: repeat(2, 1fr); }
+    .review-grid { grid-template-columns: 1fr; }
+    .review-card:nth-child(2) { transform: none; }
+    .visit-inner { grid-template-columns: 1fr; gap: 36px; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .categories, .reviews, .vibe, .newsletter { padding: 60px 24px; }
+    .visit { padding: 60px 24px; }
+  }
+</style>
 </head>
 <body>
 
-  <div class="cursor" id="cursor"></div>
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo">delighted<span></span></div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+</nav>
 
-  <!-- NAV -->
-  <nav>
-    <div class="nav-logo">The Drink<span>Yard</span></div>
-    <ul class="nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#menu">Menu</a></li>
-      <li><a href="#ambience">Ambience</a></li>
-      <li><a href="#reviews">Reviews</a></li>
-      <li><a href="#info">Find Us</a></li>
-    </ul>
-    <a href="tel:09823770644" class="nav-cta">Reserve Now</a>
-  </nav>
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg-shape shape-1"></div>
+  <div class="hero-bg-shape shape-2"></div>
+  <div class="hero-bg-shape shape-3"></div>
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-left">
-      <span class="hero-tag">✦ Kalyan West, Maharashtra</span>
-      <h1 class="hero-title">Your Cozy<br><em>Corner</em><br>Awaits</h1>
-      <p class="hero-sub">A warm, artsy café in the heart of Kalyan West — where every sip feels like coming home. Food, drinks & vibes worth staying for.</p>
-      <div class="hero-actions">
-        <a href="#menu" class="btn-primary">Explore Menu</a>
-        <a href="tel:09823770644" class="btn-ghost">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13 19.79 19.79 0 0 1 1.61 4.4a2 2 0 0 1 1.99-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.16 6.16l.91-.88a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
-          </svg>
-          Call Us
-        </a>
-      </div>
-    </div>
-    <div class="hero-right">
-      <div class="hero-bg-pattern"></div>
-      <div class="cafe-visual">
-        <div class="big-cup">☕</div>
-      </div>
-      <div class="hero-rating">
-        <div class="rating-num">4.9</div>
-        <div class="rating-stars">★★★★★</div>
-        <div class="rating-count">54 Google Reviews</div>
-      </div>
-    </div>
-    <div class="hero-scroll-hint">
-      <div class="scroll-line"></div>
-      Scroll to explore
-    </div>
-  </section>
-
-  <!-- MARQUEE -->
-  <div class="marquee-strip">
-    <div class="marquee-inner">
-      WAFFLES <span class="marquee-dot">◆</span> MOJITOS <span class="marquee-dot">◆</span> PANCAKES <span class="marquee-dot">◆</span> PIZZA BURGER <span class="marquee-dot">◆</span> WHITE SAUCE PASTA <span class="marquee-dot">◆</span> COLD BREWS <span class="marquee-dot">◆</span> SANDWICHES <span class="marquee-dot">◆</span> MILKSHAKES <span class="marquee-dot">◆</span> WAFFLES <span class="marquee-dot">◆</span> MOJITOS <span class="marquee-dot">◆</span> PANCAKES <span class="marquee-dot">◆</span> PIZZA BURGER <span class="marquee-dot">◆</span> WHITE SAUCE PASTA <span class="marquee-dot">◆</span> COLD BREWS <span class="marquee-dot">◆</span> SANDWICHES <span class="marquee-dot">◆</span> MILKSHAKES <span class="marquee-dot">◆</span>
+  <div class="hero-text">
+    <p class="hero-eyebrow">✨ asheville's favorite gift shop</p>
+    <h1 class="hero-title">find the <em>stuff</em> of joy.</h1>
+    <p class="hero-sub">A fabulously fun gift shop in the heart of downtown Asheville — brimming with whimsical, colorful, and one-of-a-kind finds that make ordinary days a little more extraordinary.</p>
+    <div class="hero-cta">
+      <a href="#shop" class="btn-primary">browse the shop</a>
+      <a href="#visit" class="btn-secondary">plan your visit</a>
     </div>
   </div>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <div class="about-text fade-up">
-      <p class="section-label">✦ Who We Are</p>
-      <h2 class="section-title">A <em>Hidden Gem</em> in Kalyan West</h2>
-      <p style="opacity:0.6; line-height:1.8; font-size:0.95rem; max-width:480px; margin-bottom:36px;">
-        Tucked in Raunak City, The Drink Yard Cafe is where warm interiors, soothing music, and exceptional flavours come together. Whether you're here to work, unwind, or make memories with loved ones — this is your place.
-      </p>
-      <div class="about-grid">
-        <div class="stat-box"><span class="stat-num">4.9★</span><span class="stat-label">Google Rating</span></div>
-        <div class="stat-box"><span class="stat-num">54+</span><span class="stat-label">Happy Reviews</span></div>
-        <div class="stat-box"><span class="stat-num">₹1–200</span><span class="stat-label">Budget Friendly</span></div>
-        <div class="stat-box"><span class="stat-num">11PM</span><span class="stat-label">Closes Late</span></div>
+  <div class="hero-visual">
+    <div class="hero-card">
+      <span class="card-emoji">🎁</span>
+      <p class="card-label">Opened 2024</p>
+      <h3 class="card-title">delighted</h3>
+      <p class="card-desc">Gifts, home goods, stationery, party supplies &amp; more — all curated with love in downtown Asheville, NC.</p>
+      <div class="stars">
+        <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
       </div>
+      <p class="rating-text">5.0 · perfectly rated on Google Maps</p>
     </div>
-    <div class="about-visual fade-up">
-      <div class="about-card">
-        <div class="about-card-icon">🌟</div>
-        <h3>More Than Just Coffee</h3>
-        <p>From crispy waffles and fluffy pancakes to refreshing mojitos and comforting pasta — our menu is crafted to delight. Quick service, friendly staff, and a vibe you'll want to come back to.</p>
-      </div>
-    </div>
-  </section>
+  </div>
+</section>
 
-  <!-- MENU -->
-  <section id="menu">
-    <div class="menu-header">
-      <div>
-        <p class="section-label">✦ What We Serve</p>
-        <h2 class="section-title">Our <em>Menu</em></h2>
-      </div>
-      <div class="menu-tabs">
-        <button class="tab-btn active" onclick="filterMenu('all', this)">All</button>
-        <button class="tab-btn" onclick="filterMenu('drinks', this)">Drinks</button>
-        <button class="tab-btn" onclick="filterMenu('food', this)">Food</button>
-        <button class="tab-btn" onclick="filterMenu('dessert', this)">Desserts</button>
-      </div>
-    </div>
-    <div class="menu-grid" id="menuGrid">
-      <!-- DRINKS -->
-      <div class="menu-item fade-up" data-cat="drinks">
-        <div class="menu-item-img">🍵</div>
-        <div class="menu-item-body">
-          <div class="menu-item-name">Classic Café Latte</div>
-          <div class="menu-item-desc">Rich espresso with velvety steamed milk, served hot or iced</div>
-          <div class="menu-item-footer"><span class="menu-price">₹80</span><span class="menu-badge">Hot / Iced</span></div>
-        </div>
-      </div>
-      <div class="menu-item fade-up" data-cat="drinks">
-        <div class="menu-item-img">🍋</div>
-        <div class="menu-item-body">
-          <div class="menu-item-name">Virgin Mojito</div>
-          <div class="menu-item-desc">Mint, lime, soda — the perfect refresher for any time of day</div>
-          <div class="menu-item-footer"><span class="menu-price">₹100</span><span class="menu-badge">⭐ Bestseller</span></div>
-        </div>
-      </div>
-      <div class="menu-item fade-up" data-cat="drinks">
-        <div class="menu-item-img">🥤</div>
-        <div class="menu-item-body">
-          <div class="menu-item-name">Thick Milkshake</div>
-          <div class="menu-item-desc">Chocolate, vanilla, or strawberry — blended to creamy perfection</div>
-          <div class="menu-item-footer"><span class="menu-price">₹120</span><span class="menu-badge">3 Flavours</span></div>
-        </div>
-      </div>
-      <!-- FOOD -->
-      <div class="menu-item fade-up" data-cat="food">
-        <div class="menu-item-img">🍕</div>
-        <div class="menu-item-body">
-          <div class="menu-item-name">Pizza Burger</div>
-          <div class="menu-item-desc">A bold mashup — pizza-spiced patty in a soft brioche bun, fully loaded</div>
-          <div class="menu-item-footer"><span class="menu-price">₹149</span><span class="menu-badge">⭐ Bestseller</span></div>
-        </div>
-      </div>
-      <div class="menu-item fade-up" data-cat="food">
-        <div class="menu-item-img">🍝</div>
-        <div class="menu-item-body">
-          <div class="menu-item-name">White Sauce Pasta</div>
-          <div class="menu-item-desc">Creamy béchamel, al dente penne, topped with herbs and cheese</div>
-          <div class="menu-item-footer"><span class="menu-price">₹130</span><span class="menu-badge">Crowd Fav</span></div>
-        </div>
-      </div>
-      <div class="menu-item fade-up" data-cat="food">
-        <div class="menu-item-img">🥪</div>
-        <div class="menu-item-body">
-          <div class="menu-item-name">Grilled Sandwich</div>
-          <div class="menu-item-desc">Toasted to golden crunch with seasonal veggies and melted cheese</div>
-          <div class="menu-item-footer"><span class="menu-price">₹80</span><span class="menu-badge">Budget Pick</span></div>
-        </div>
-      </div>
-      <!-- DESSERT -->
-      <div class="menu-item fade-up" data-cat="dessert">
-        <div class="menu-item-img">🧇</div>
-        <div class="menu-item-body">
-          <div class="menu-item-name">Belgian Waffles</div>
-          <div class="menu-item-desc">Crispy outside, fluffy inside — with chocolate drizzle & fresh cream</div>
-          <div class="menu-item-footer"><span class="menu-price">₹140</span><span class="menu-badge">⭐ Must Try</span></div>
-        </div>
-      </div>
-      <div class="menu-item fade-up" data-cat="dessert">
-        <div class="menu-item-img">🥞</div>
-        <div class="menu-item-body">
-          <div class="menu-item-name">Fluffy Pancakes</div>
-          <div class="menu-item-desc">Soft, golden stacks served with maple syrup and a dusting of sugar</div>
-          <div class="menu-item-footer"><span class="menu-price">₹130</span><span class="menu-badge">⭐ Bestseller</span></div>
-        </div>
-      </div>
-      <div class="menu-item fade-up" data-cat="dessert">
-        <div class="menu-item-img">🍨</div>
-        <div class="menu-item-body">
-          <div class="menu-item-name">Ice Cream Sundae</div>
-          <div class="menu-item-desc">Two scoops of premium ice cream, hot fudge, nuts & a cherry on top</div>
-          <div class="menu-item-footer"><span class="menu-price">₹100</span><span class="menu-badge">Sweet Ending</span></div>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- ── MARQUEE ── -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">gifts <span class="marquee-dot">◆</span></div>
+    <div class="marquee-item">home goods <span class="marquee-dot">◆</span></div>
+    <div class="marquee-item">stationery <span class="marquee-dot">◆</span></div>
+    <div class="marquee-item">party supplies <span class="marquee-dot">◆</span></div>
+    <div class="marquee-item">local art <span class="marquee-dot">◆</span></div>
+    <div class="marquee-item">candles <span class="marquee-dot">◆</span></div>
+    <div class="marquee-item">socks &amp; bags <span class="marquee-dot">◆</span></div>
+    <div class="marquee-item">unique finds <span class="marquee-dot">◆</span></div>
+    <div class="marquee-item">asheville made <span class="marquee-dot">◆</span></div>
+    <!-- duplicate for seamless loop -->
+    <div class="marquee-item">gifts <span class="marquee-dot">◆</span></div>
+    <div class="marquee-item">home goods <span class="marquee-dot">◆</span></div>
+    <div class="marquee-item">stationery <span class="marquee-dot">◆</span></div>
+    <div class="marquee-item">party supplies <span class="marquee-dot">◆</span></div>
+    <div class="marquee-item">local art <span class="marquee-dot">◆</span></div>
+    <div class="marquee-item">candles <span class="marquee-dot">◆</span></div>
+    <div class="marquee-item">socks &amp; bags <span class="marquee-dot">◆</span></div>
+    <div class="marquee-item">unique finds <span class="marquee-dot">◆</span></div>
+    <div class="marquee-item">asheville made <span class="marquee-dot">◆</span></div>
+  </div>
+</div>
 
-  <!-- AMBIENCE -->
-  <section id="ambience">
-    <p class="section-label">✦ The Experience</p>
-    <h2 class="section-title">More Than a <em>Café</em></h2>
-    <p style="opacity:0.5; font-size:0.95rem; max-width:500px; margin:0 auto;">Every corner of The Drink Yard is designed to make you feel at home — and want to stay a little longer.</p>
-    <div class="ambience-grid">
-      <div class="amb-card fade-up">
-        <div class="amb-icon">🎵</div>
-        <h3>Soothing Music</h3>
-        <p>Curated playlists that set the perfect mood — whether you're catching up with friends or working solo.</p>
+<!-- ── ABOUT ── -->
+<section class="about" id="about">
+  <div class="about-image-stack reveal">
+    <div class="img-placeholder img-1">🎀</div>
+    <div class="img-placeholder img-2">🕯️</div>
+    <div class="img-tag tag-1">63 Haywood St 📍</div>
+    <div class="img-tag tag-2">opened March 2024 🎉</div>
+  </div>
+
+  <div class="reveal">
+    <p class="section-eyebrow">our story</p>
+    <h2 class="section-title">born from a love of <em>color, joy,</em> and really good gifts.</h2>
+    <p class="about-body">
+      delighted opened its colorful doors in March 2024 on Haywood Street in downtown Asheville, and the community fell in love instantly. We believe ordinary life can be made a bit more joyful with practical items that are beautiful, whimsical, or funny.
+    </p>
+    <p class="about-body">
+      Every item on our shelves is carefully hand-picked — from playful jellyfish doormats and hand-painted plates to cheeky tea towels, artisan candles, and locally sourced souvenirs. If it makes you smile, it belongs here.
+    </p>
+
+    <div class="about-stats">
+      <div class="stat-block">
+        <div class="stat-number">5.0</div>
+        <div class="stat-label">Google Rating</div>
       </div>
-      <div class="amb-card fade-up">
-        <div class="amb-icon">🛋️</div>
-        <h3>Warm Interiors</h3>
-        <p>Cozy seating, warm lighting, and thoughtful decor that creates a space you'll want to linger in.</p>
+      <div class="stat-block">
+        <div class="stat-number">2024</div>
+        <div class="stat-label">Year Founded</div>
       </div>
-      <div class="amb-card fade-up">
-        <div class="amb-icon">💻</div>
-        <h3>Work-Friendly</h3>
-        <p>A great spot to focus, create, and get things done — with good Wi-Fi and even better coffee.</p>
-      </div>
-      <div class="amb-card fade-up">
-        <div class="amb-icon">👨‍👩‍👧</div>
-        <h3>Family Welcome</h3>
-        <p>A safe, comfortable space for families, couples, and groups of friends to make memories together.</p>
-      </div>
-      <div class="amb-card fade-up">
-        <div class="amb-icon">🌿</div>
-        <h3>Outside Area</h3>
-        <p>Enjoy fresh air with an outdoor seating section — perfect for evenings and breezy Kalyan weather.</p>
-      </div>
-      <div class="amb-card fade-up">
-        <div class="amb-icon">⚡</div>
-        <h3>Quick Service</h3>
-        <p>Friendly staff who are attentive and fast — because your time is as valuable as your experience.</p>
+      <div class="stat-block">
+        <div class="stat-number">100+</div>
+        <div class="stat-label">Unique Items</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- REVIEWS -->
-  <section id="reviews">
-    <p class="section-label">✦ What People Say</p>
-    <h2 class="section-title">Real <em>Words</em>, Real People</h2>
-    <div class="reviews-grid">
-      <div class="review-card fade-up">
-        <div class="review-quote">"</div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">This cafe is a hidden gem. The warm interiors and soothing music create a very comfortable environment. Their food is excellent, and the menu has a good variety. Service was quick and courteous. A great place to unwind.</p>
-        <div class="reviewer">
-          <div class="reviewer-avatar">PT</div>
-          <div>
-            <div class="reviewer-name">Pranjit Thakur</div>
-            <div class="reviewer-meta">6 Reviews · 3 months ago</div>
-          </div>
+<!-- ── CATEGORIES ── -->
+<section class="categories" id="shop">
+  <div class="categories-header reveal">
+    <p class="section-eyebrow">what we carry</p>
+    <h2 class="section-title">something <em>delightful</em> for everyone</h2>
+  </div>
+
+  <div class="cat-grid">
+    <div class="cat-card reveal">
+      <span class="cat-emoji">💌</span>
+      <h3 class="cat-name">Stationery & Cards</h3>
+      <p class="cat-desc">A whole wall of cards for every occasion — heartfelt, hilarious, and everything in between.</p>
+    </div>
+    <div class="cat-card reveal">
+      <span class="cat-emoji">🕯️</span>
+      <h3 class="cat-name">Candles & Apothecary</h3>
+      <p class="cat-desc">Hand-poured candles and artisan body care that smell like a weekend in the mountains.</p>
+    </div>
+    <div class="cat-card reveal">
+      <span class="cat-emoji">🏡</span>
+      <h3 class="cat-name">Home Goods</h3>
+      <p class="cat-desc">Tea towels, doormats, mugs, and décor to brighten every corner of your space.</p>
+    </div>
+    <div class="cat-card reveal">
+      <span class="cat-emoji">🎉</span>
+      <h3 class="cat-name">Party Supplies</h3>
+      <p class="cat-desc">Unique party supplies that make celebrations actually memorable.</p>
+    </div>
+    <div class="cat-card reveal">
+      <span class="cat-emoji">👜</span>
+      <h3 class="cat-name">Bags & Totes</h3>
+      <p class="cat-desc">Purses, totes, and pouches for every personality. Functional and fabulous.</p>
+    </div>
+    <div class="cat-card reveal">
+      <span class="cat-emoji">🧦</span>
+      <h3 class="cat-name">Socks & Accessories</h3>
+      <p class="cat-desc">The perfect impulse buy — statement socks, pins, and other fun wearables.</p>
+    </div>
+    <div class="cat-card reveal">
+      <span class="cat-emoji">🎨</span>
+      <h3 class="cat-name">Local Art</h3>
+      <p class="cat-desc">Prints, ceramics, and handcrafted items made right here in Western North Carolina.</p>
+    </div>
+    <div class="cat-card reveal">
+      <span class="cat-emoji">🧸</span>
+      <h3 class="cat-name">Gifts & Novelties</h3>
+      <p class="cat-desc">Puzzles, quirky toys, and gifts that are impossible not to smile at.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── VIBE ── -->
+<section class="vibe">
+  <h2 class="vibe-title reveal">we believe that <em>beautiful</em>, useful, funny things<br>make life so much better.</h2>
+  <div class="vibe-pills reveal">
+    <span class="pill pill-pink">colorful</span>
+    <span class="pill pill-yellow">joyful</span>
+    <span class="pill pill-teal">locally loved</span>
+    <span class="pill pill-coral">whimsical</span>
+    <span class="pill pill-lilac">thoughtfully curated</span>
+    <span class="pill pill-green">one-of-a-kind</span>
+    <span class="pill pill-pink">asheville-made</span>
+    <span class="pill pill-yellow">gift-worthy</span>
+  </div>
+</section>
+
+<!-- ── REVIEWS ── -->
+<section class="reviews" id="reviews">
+  <div class="reviews-header reveal">
+    <p class="section-eyebrow">what people say</p>
+    <h2 class="section-title">loved by <em>asheville</em></h2>
+  </div>
+
+  <div class="review-grid">
+    <div class="review-card reveal">
+      <div class="quote-mark">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-quote">The best gift shop! They have such cute items at a variety of price points, including multiple locally hand-made souvenirs. There's also a whole wall of cards and unique party supplies.</p>
+      <p class="reviewer">— Google Review</p>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="quote-mark">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-quote">Delighted is my new go-to gift store! No matter the person or occasion, I always find just the right thing. Prices are great and the helpful people running the store are the icing on the cake.</p>
+      <p class="reviewer">— Local Regular</p>
+    </div>
+
+    <div class="review-card reveal">
+      <div class="quote-mark">"</div>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-quote">This shop is a true gem! Very well-curated and full of truly unique lines, brands, artists and products you don't see everywhere. Definitely worth a stop if you are strolling through Asheville!</p>
+      <p class="reviewer">— Visitor from Google</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── VISIT ── -->
+<section class="visit" id="visit">
+  <div class="visit-inner">
+    <div class="reveal">
+      <h2 class="visit-title">come find your new favorite thing.</h2>
+      <p class="visit-sub">We're right in the heart of downtown Asheville on Haywood Street — walk in, stay a while, and leave with something that makes you smile.</p>
+      <a href="https://maps.google.com/?q=63+Haywood+St+Asheville+NC" target="_blank" class="visit-btn">get directions</a>
+    </div>
+
+    <div class="visit-info reveal">
+      <div class="info-row">
+        <span class="info-icon">📍</span>
+        <div>
+          <p class="info-label">Address</p>
+          <p class="info-value">63 Haywood Street<br>Asheville, NC 28801</p>
         </div>
       </div>
-      <div class="review-card fade-up">
-        <div class="review-quote">"</div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">Lovely time! The ambiance is cozy and the staff were friendly. Pizza burger and mojito were so good. The waffles and pancakes were so delicious. A great spot to chill with friends or work. Will definitely be back!</p>
-        <div class="reviewer">
-          <div class="reviewer-avatar">SS</div>
-          <div>
-            <div class="reviewer-name">Surabhi Singh</div>
-            <div class="reviewer-meta">4 Reviews · 3 months ago</div>
-          </div>
+      <div class="info-row">
+        <span class="info-icon">🕐</span>
+        <div>
+          <p class="info-label">Hours</p>
+          <p class="info-value">
+            Mon &amp; Fri — 11am – 5pm<br>
+            Wed, Thu, Sat — 11am – 5pm<br>
+            Sun — 11am – 4pm<br>
+            <em style="font-size:0.85em;opacity:0.7;">Tuesday: Closed</em>
+          </p>
         </div>
       </div>
-      <div class="review-card fade-up">
-        <div class="review-quote">"</div>
-        <div class="review-stars">★★★★★</div>
-        <p class="review-text">Very good hospitality, ambience is great, and budget friendly options. Nice location. Good for family and friends. Truly one of the best cafes in Kalyan — will return with more people!</p>
-        <div class="reviewer">
-          <div class="reviewer-avatar">AJ</div>
-          <div>
-            <div class="reviewer-name">Aniruddha Jadhav</div>
-            <div class="reviewer-meta">Local Guide · 354 Reviews · 2 months ago</div>
-          </div>
+      <div class="info-row">
+        <span class="info-icon">✨</span>
+        <div>
+          <p class="info-label">Vibe</p>
+          <p class="info-value">Colorful · Joyful · Walkable neighborhood location</p>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- INFO / FIND US -->
-  <section id="info">
-    <div class="fade-up">
-      <p class="section-label">✦ Find Us</p>
-      <h2 class="section-title">Come <em>Visit</em> Us</h2>
-      <ul class="info-list">
-        <li>
-          <span class="info-icon">📍</span>
-          <div class="info-detail">
-            <strong>Address</strong>
-            <span>Shop No 21, Wadeghar Road Adharwadi, D7, Sector 4, Raunak City, Kalyan West, Maharashtra 421301</span>
-          </div>
-        </li>
-        <li>
-          <span class="info-icon">🕐</span>
-          <div class="info-detail">
-            <strong>Hours</strong>
-            <span>Open Daily · Closes at 11:00 PM</span>
-          </div>
-        </li>
-        <li>
-          <span class="info-icon">📞</span>
-          <div class="info-detail">
-            <strong>Phone</strong>
-            <span>098237 70644</span>
-          </div>
-        </li>
-        <li>
-          <span class="info-icon">💰</span>
-          <div class="info-detail">
-            <strong>Price Range</strong>
-            <span>₹1 – ₹200 per person</span>
-          </div>
-        </li>
-        <li>
-          <span class="info-icon">🚗</span>
-          <div class="info-detail">
-            <strong>Options</strong>
-            <span>Dine-in · Drive-through · No-contact Delivery</span>
-          </div>
-        </li>
+<!-- ── NEWSLETTER ── -->
+<section class="newsletter">
+  <p class="section-eyebrow" style="margin-bottom:8px;">stay in the loop</p>
+  <h2 class="newsletter-title">get the good stuff first. 💌</h2>
+  <p class="newsletter-sub">New arrivals, events, pop-ups, and seasonal finds — straight to your inbox.</p>
+  <div class="email-form">
+    <input type="email" placeholder="your email address">
+    <button type="button">Subscribe</button>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="nav-logo">delighted<span style="background:var(--pink);"></span></span>
+      <p class="footer-tagline">A fabulously fun gift shop<br>bringing you the stuff of joy.<br><br>63 Haywood St, Asheville NC</p>
+      <div class="social-row" style="margin-top:20px;">
+        <a href="#" class="social-btn">📸</a>
+        <a href="#" class="social-btn">📘</a>
+        <a href="#" class="social-btn">🐦</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <p class="footer-col-title">Shop</p>
+      <ul>
+        <li><a href="#">Gifts</a></li>
+        <li><a href="#">Home Goods</a></li>
+        <li><a href="#">Stationery</a></li>
+        <li><a href="#">Local Art</a></li>
+        <li><a href="#">Party Supplies</a></li>
       </ul>
     </div>
-    <div class="fade-up">
-      <div class="map-placeholder">
-        <div class="map-pin">📍</div>
-        <p class="map-address">Shop No 21, Wadeghar Road, Sector 4, Raunak City, Kalyan West</p>
-        <a href="https://maps.google.com/?q=The+Drink+Yard+Cafe+Kalyan" target="_blank" class="map-btn">Open in Google Maps</a>
-      </div>
-    </div>
-  </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-top">
-      <div>
-        <div class="footer-brand">The Drink<span>Yard</span></div>
-        <div class="footer-tagline">Your cozy corner in Kalyan West ✦</div>
-      </div>
-      <div class="footer-links">
-        <a href="#about">About Us</a>
-        <a href="#menu">Menu</a>
-        <a href="#ambience">Experience</a>
-        <a href="#reviews">Reviews</a>
-        <a href="#info">Find Us</a>
-      </div>
-      <div class="footer-contact">
-        <strong>📍 Kalyan West, MH</strong><br>
-        Raunak City, Sector 4<br>
-        <strong>📞 098237 70644</strong><br>
-        Open till 11 PM daily
-      </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Visit</p>
+      <ul>
+        <li><a href="#">Hours & Location</a></li>
+        <li><a href="#">Parking Info</a></li>
+        <li><a href="#">Downtown Asheville</a></li>
+        <li><a href="#">Events & Pop-ups</a></li>
+      </ul>
     </div>
-    <div class="footer-bottom">
-      <span>© 2025 The Drink Yard Cafe · Kalyan West</span>
-      <span>Rated 4.9 ★ on Google</span>
-    </div>
-  </footer>
 
-  <script>
-    // Custom cursor
-    const cursor = document.getElementById('cursor');
-    document.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
+    <div class="footer-col">
+      <p class="footer-col-title">Connect</p>
+      <ul>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="#">Gift Wrapping</a></li>
+        <li><a href="#">Leave a Review</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2025 delighted gift shop · asheville, nc · all rights reserved</p>
+    <p class="footer-heart">made with ♥ in asheville</p>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
     });
-    document.querySelectorAll('a, button, .menu-item, .amb-card, .review-card').forEach(el => {
-      el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-      el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-    });
+  }, { threshold: 0.12 });
 
-    // Scroll animations
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Menu filter
-    function filterMenu(cat, btn) {
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      document.querySelectorAll('.menu-item').forEach(item => {
-        if (cat === 'all' || item.dataset.cat === cat) {
-          item.style.display = '';
-        } else {
-          item.style.display = 'none';
-        }
-      });
+  // Newsletter button
+  document.querySelector('.email-form button').addEventListener('click', function() {
+    const input = document.querySelector('.email-form input');
+    if (input.value && input.value.includes('@')) {
+      this.textContent = '✓ subscribed!';
+      this.style.background = '#4ecdc4';
+      input.value = '';
+      input.placeholder = 'thanks for joining!';
+    } else {
+      input.style.borderColor = 'var(--coral)';
+      input.placeholder = 'please enter a valid email';
+      setTimeout(() => { input.style.borderColor = ''; input.placeholder = 'your email address'; }, 2000);
     }
-  </script>
+  });
+</script>
+
 </body>
 </html>
